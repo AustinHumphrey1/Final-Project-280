@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GreenTech Solutions</title>
+
+  <!-- React -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+  <!-- Babel -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:'Poppins', sans-serif;
+      transition:0.3s;
+    }
+
+    .light{
+      background:#f4fff4;
+      color:#222;
+    }
+
+    .dark{
+      background:#111;
+      color:white;
+    }
+
+    header{
+      background:linear-gradient(90deg,#1b5e20,#2e7d32);
+      color:white;
+      padding:15px 30px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      position:sticky;
+      top:0;
+      z-index:100;
+    }
+
+    header h1{
+      font-size:28px;
+    }
+
+    nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    nav button{
+      background:white;
+      color:#2e7d32;
+      border:none;
+      padding:10px 15px;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:600;
+      transition:0.3s;
+    }
+
+    nav button:hover{
+      background:#c8e6c9;
+      transform:scale(1.05);
+    }
+
+    .toggle-btn{
+      background:#000;
+      color:white;
+      border:none;
+      padding:10px 15px;
+      border-radius:8px;
+      cursor:pointer;
+    }
+
+    .hero{
+      min-height:80vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:40px;
+      background:
+      linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),
+      url('https://images.unsplash.com/photo-1509395176047-4a66953fd231?q=80&w=1974&auto=format&fit=crop');
+      background-size:cover;
+      background-position:center;
+      color:white;
+    }
+
+    .hero-content{
+      max-width:800px;
+      animation:fadeIn 1s ease;
+    }
+
+    .hero h2{
+      font-size:50px;
+      margin-bottom:20px;
+    }
+
+    .hero p{
+      font-size:20px;
+      margin-bottom:25px;
+      line-height:1.6;
+    }
+
+    .btn{
+      background:#43a047;
+      color:white;
+      border:none;
+      padding:14px 22px;
+      border-radius:8px;
+      cursor:pointer;
+      font-size:16px;
+      transition:0.3s;
+    }
+
+    .btn:hover{
+      background:#2e7d32;
+      transform:translateY(-2px);
+    }
+
+    section{
+      padding:60px 30px;
+    }
+
+    .section-title{
+      text-align:center;
+      margin-bottom:40px;
+      font-size:36px;
+      color:#2e7d32;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:25px;
+    }
+
+    .card{
+      background:white;
+      border-radius:15px;
+      overflow:hidden;
+      box-shadow:0 5px 15px rgba(0,0,0,0.1);
+      transition:0.3s;
+    }
+
+    .dark .card{
+      background:#1e1e1e;
+    }
+
+    .card:hover{
+      transform:translateY(-8px);
+    }
+
+    .card img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+    }
+
+    .card-content{
+      padding:20px;
+    }
+
+    .card h3{
+      margin-bottom:10px;
+      color:#2e7d32;
+    }
+
+    .timeline{
+      max-width:800px;
+      margin:auto;
+    }
+
+    .timeline-item{
+      background:white;
+      padding:20px;
+      margin-bottom:20px;
+      border-left:6px solid #2e7d32;
+      border-radius:10px;
+    }
+
+    .dark .timeline-item{
+      background:#1e1e1e;
+    }
+
+    .blog-card{
+      padding:25px;
+    }
+
+    form{
+      max-width:700px;
+      margin:auto;
+      background:white;
+      padding:30px;
+      border-radius:15px;
+      box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .dark form{
+      background:#1e1e1e;
+    }
+
+    input, textarea, select{
+      width:100%;
+      padding:14px;
+      margin-top:10px;
+      margin-bottom:20px;
+      border:1px solid #ccc;
+      border-radius:8px;
+      font-size:16px;
+    }
+
+    footer{
+      background:#1b5e20;
+      color:white;
+      text-align:center;
+      padding:20px;
+    }
+
+    .success{
+      background:#c8e6c9;
+      color:#1b5e20;
+      padding:15px;
+      border-radius:8px;
+      margin-bottom:20px;
+      text-align:center;
+      font-weight:bold;
+    }
+
+    .filter-box{
+      max-width:300px;
+      margin:0 auto 30px auto;
+    }
+
+    @keyframes fadeIn{
+      from{
+        opacity:0;
+        transform:translateY(20px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    @media(max-width:768px){
+
+      .hero h2{
+        font-size:34px;
+      }
+
+      header{
+        flex-direction:column;
+        gap:15px;
+      }
+
+      nav{
+        justify-content:center;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+const products = [
+{
+  id:1,
+  name:"EcoSmart Energy Monitor",
+  category:"Energy",
+  image:"https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?q=80&w=2070&auto=format&fit=crop",
+  desc:"Track and optimize your business energy usage in real-time."
+},
+{
+  id:2,
+  name:"Smart Recycling System",
+  category:"Waste",
+  image:"https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?q=80&w=1974&auto=format&fit=crop",
+  desc:"AI-powered smart recycling system for efficient waste sorting."
+},
+{
+  id:3,
+  name:"Carbon Tracker Pro",
+  category:"Software",
+  image:"https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=2069&auto=format&fit=crop",
+  desc:"Advanced software to monitor and reduce carbon emissions."
+}
+];
+
+const blogs = [
+{
+  id:1,
+  title:"10 Ways Businesses Can Reduce Carbon Emissions",
+  text:"Discover practical ways companies can improve sustainability and reduce environmental impact."
+},
+{
+  id:2,
+  title:"The Future of Eco-Friendly Technology",
+  text:"Learn how innovation and sustainability are shaping tomorrow's business world."
+},
+{
+  id:3,
+  title:"Why Green Technology Matters",
+  text:"Understand how sustainable technology benefits businesses and the planet."
+}
+];
+
+function App(){
+
+  const [page,setPage] = React.useState("home");
+  const [darkMode,setDarkMode] = React.useState(false);
+  const [filter,setFilter] = React.useState("All");
+  const [submitted,setSubmitted] = React.useState(false);
+
+  const [formData,setFormData] = React.useState({
+    name:"",
+    email:"",
+    message:""
+  });
+
+  const filteredProducts =
+    filter === "All"
+    ? products
+    : products.filter(product => product.category === filter);
+
+  function handleSubmit(e){
+    e.preventDefault();
+    setSubmitted(true);
+
+    setFormData({
+      name:"",
+      email:"",
+      message:""
+    });
+  }
+
+  return(
+
+    <div className={darkMode ? "dark" : "light"}>
+
+      {/* HEADER */}
+
+      <header>
+
+        <h1>GreenTech Solutions</h1>
+
+        <nav>
+
+          <button onClick={()=>setPage("home")}>Home</button>
+
+          <button onClick={()=>setPage("about")}>About</button>
+
+          <button onClick={()=>setPage("products")}>Products</button>
+
+          <button onClick={()=>setPage("blog")}>Blog</button>
+
+          <button onClick={()=>setPage("contact")}>Contact</button>
+
+        </nav>
+
+        <button
+          className="toggle-btn"
+          onClick={()=>setDarkMode(!darkMode)}
+        >
+          {darkMode ? "Light Mode" : "Dark Mode"}
+        </button>
+
+      </header>
+
+      {/* HOME */}
+
+      {page === "home" && (
+
+        <>
+          <section className="hero">
+
+            <div className="hero-content">
+
+              <h2>Sustainable Technology For A Better Future</h2>
+
+              <p>
+                GreenTech Solutions helps businesses reduce their carbon footprint
+                through innovative eco-friendly technology and smart sustainability tools.
+              </p>
+
+              <button
+                className="btn"
+                onClick={()=>setPage("products")}
+              >
+                Explore Products
+              </button>
+
+            </div>
+
+          </section>
+
+          <section>
+
+            <h2 className="section-title">Featured Solutions</h2>
+
+            <div className="grid">
+
+              {products.map(product => (
+
+                <div className="card" key={product.id}>
+
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                  />
+
+                  <div className="card-content">
+
+                    <h3>{product.name}</h3>
+
+                    <p>{product.desc}</p>
+
+                  </div>
+
+                </div>
+
+              ))}
+
+            </div>
+
+          </section>
+        </>
+      )}
+
+      {/* ABOUT */}
+
+      {page === "about" && (
+
+        <section>
+
+          <h2 className="section-title">About GreenTech</h2>
+
+          <div style={{maxWidth:"900px", margin:"auto", lineHeight:"1.8"}}>
+
+            <p>
+              GreenTech Solutions was founded to combine environmental responsibility
+              with innovative technology. Our mission is to help businesses become
+              more sustainable through smart energy systems, recycling technologies,
+              and carbon monitoring software.
+            </p>
+
+            <br/>
+
+            <p>
+              We believe sustainability and innovation should work together to
+              create a healthier planet for future generations.
+            </p>
+
+          </div>
+
+          <br/><br/>
+
+          <h2 className="section-title">Company Timeline</h2>
+
+          <div className="timeline">
+
+            <div className="timeline-item">
+              <h3>2022</h3>
+              <p>GreenTech Solutions founded.</p>
+            </div>
+
+            <div className="timeline-item">
+              <h3>2023</h3>
+              <p>Launched Carbon Tracker Pro software.</p>
+            </div>
+
+            <div className="timeline-item">
+              <h3>2024</h3>
+              <p>Expanded sustainability partnerships nationwide.</p>
+            </div>
+
+          </div>
+
+        </section>
+      )}
+
+      {/* PRODUCTS */}
+
+      {page === "products" && (
+
+        <section>
+
+          <h2 className="section-title">Products & Services</h2>
+
+          <div className="filter-box">
+
+            <select
+              onChange={(e)=>setFilter(e.target.value)}
+            >
+              <option>All</option>
+              <option>Energy</option>
+              <option>Waste</option>
+              <option>Software</option>
+            </select>
+
+          </div>
+
+          <div className="grid">
+
+            {filteredProducts.map(product => (
+
+              <div className="card" key={product.id}>
+
+                <img
+                  src={product.image}
+                  alt={product.name}
+                />
+
+                <div className="card-content">
+
+                  <h3>{product.name}</h3>
+
+                  <p>{product.desc}</p>
+
+                  <br/>
+
+                  <strong>{product.category}</strong>
+
+                </div>
+
+              </div>
+
+            ))}
+
+          </div>
+
+        </section>
+      )}
+
+      {/* BLOG */}
+
+      {page === "blog" && (
+
+        <section>
+
+          <h2 className="section-title">Blog & Resources</h2>
+
+          <div className="grid">
+
+            {blogs.map(blog => (
+
+              <div className="card blog-card" key={blog.id}>
+
+                <h3>{blog.title}</h3>
+
+                <br/>
+
+                <p>{blog.text}</p>
+
+              </div>
+
+            ))}
+
+          </div>
+
+        </section>
+      )}
+
+      {/* CONTACT */}
+
+      {page === "contact" && (
+
+        <section>
+
+          <h2 className="section-title">Contact Us</h2>
+
+          <form onSubmit={handleSubmit}>
+
+            {submitted &&
+              <div className="success">
+                Message Sent Successfully!
+              </div>
+            }
+
+            <label>Name</label>
+
+            <input
+              type="text"
+              required
+              value={formData.name}
+              onChange={(e)=>
+                setFormData({
+                  ...formData,
+                  name:e.target.value
+                })
+              }
+            />
+
+            <label>Email</label>
+
+            <input
+              type="email"
+              required
+              value={formData.email}
+              onChange={(e)=>
+                setFormData({
+                  ...formData,
+                  email:e.target.value
+                })
+              }
+            />
+
+            <label>Message</label>
+
+            <textarea
+              rows="6"
+              required
+              value={formData.message}
+              onChange={(e)=>
+                setFormData({
+                  ...formData,
+                  message:e.target.value
+                })
+              }
+            ></textarea>
+
+            <button className="btn">
+              Send Message
+            </button>
+
+            <br/><br/>
+
+            <p><strong>Email:</strong> contact@greentech.com</p>
+
+            <p><strong>Phone:</strong> (555) 123-4567</p>
+
+            <p><strong>Address:</strong> 123 Green Street, Eco City</p>
+
+          </form>
+
+        </section>
+      )}
+
+      {/* FOOTER */}
+
+      <footer>
+
+        <p>
+          © 2026 GreenTech Solutions | Sustainable Innovation For Everyone
+        </p>
+
+      </footer>
+
+    </div>
+
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+
+</script>
+
+</body>
+</html>
